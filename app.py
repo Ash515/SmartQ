@@ -1,118 +1,144 @@
-class Canteen:
-    def __init__(self, cname):
-        self.cname = cname
+from unicodedata import category
 
-    def display(self):
-        print(self.cname)
-
-
-# class Dishes:
-#     def __init__(self) -> None:
-#         pass
-
-#     def title(self):
-#         print("\n***Dishes Catelogue***")
-
-#     def VegList(self, i1, i2, i3, i4, i5):
-#         print("\n****1.Available Veg Foods****")
-#         print(i1)
-#         print(i2)
-#         print(i3)
-#         print(i4)
-#         print(i5)
-
-#     def NonVegList(self, i1, i2, i3, i4, i5):
-#         print("\n ****2.Available NonVeg Foods****")
-#         print(i1)
-#         print(i2)
-#         print(i3)
-#         print(i4)
-#         print(i5)
-
-#     def JuiceList(self, i1, i2, i3, i4, i5):
-#         print("\n ****3.Available Juices****")
-#         print(i1)
-#         print(i2)
-#         print(i3)
-#         print(i4)
-#         print(i5)
+from pathy import StreamableType
+from pytz import AmbiguousTimeError
+import os
 
 
-# class UserChoice(Dishes):
-#     def __init__(self, choice):
-#         self.choice = choice
-
-#     def ChoiceCall(self):
-#         if (self.choice == 1):
-#             Dishes.VegList()
-#         elif(self.choice == 2):
-#             Dishes.NonVegList()
-#         else:
-#             Dishes.JuiceList()
-
-
-class ManagerDishEnteryChoice():
-    def __init__(self, choice):
-        self.choice = choice
-
-    def DishEntry(self, itemCount):
-
-        vegList = {}
-        nonvegList = {}
-        juiceList = {}
-        if self.choice == 1:
-
-            i = 0
-            while (i < itemCount):
-                item1 = input("Enter Item 1:")
-                item1Amt = int(input("Enter the amount for item1"))
-                vegList[item1] = item1Amt
-                i += 1
-        elif(self.choice == 2):
-
-            i = 0
-            while (i < itemCount):
-                item2 = input("Enter Item 2:")
-                item2Amt = int(input("Enter the amount for item2"))
-                nonvegList[item2] = item2Amt
-                i += 1
-        else:
-
-            i = 0
-            while (i < itemCount):
-                item3 = input("Enter Item 3:")
-                item3Amt = int(input("Enter the amount for item3"))
-                juiceList[item3] = item3Amt
-                i += 1
-        print("\n***Dishes***")
-        for k,v in vegList.items:
-            print("Item Name:",k,"Item Amount:",v)
-        for k,v in nonvegList.items:
-            print("Item Name:",k,"Item Amount:",v)
-        for k,v in juiceList.items:
-            print("Item Name:",k,"Item Amount:",v)
-        
-
-
-# Canteen Manager Interface
-nameEntry = input("Enter the canteen name:")
-Cname = Canteen(nameEntry)
-Cname.display()
-status = int(input("Do you want to entry the new Items 1.Yes  2.No"))
-if status == 1:
-    item = int(input("1.Veg 2.Non Veg 3.Juice"))
-    if item == 1:
-        vegentry = ManagerDishEnteryChoice(1)
-        itemCnt = int(input("How many Items:"))
-        vegentry.DishEntry(itemCnt)
-    elif(item == 2):
-        nonvegentry = ManagerDishEnteryChoice(2)
+def index():
+    print("*********Smart Canteen System*********")
+    regno = int(input("Enter your Register number:"))
+    password = int(input("Enter your password:"))
+    if (regno and password):
+        authentication(regno, password)
     else:
-        juiceentry = ManagerDishEnteryChoice(3)
-else:
-    print("not selected ")
+        print("Please enter all the fields")
 
 
-# dishes.VegList("1.Idly","2.Dosa","3.Sambar","4.Lemon Rice","5.Veg rice")
-# dishes.NonVegList("1.Biryani","2.Chicken Curry","3.Egg","4.Chicken Rice","5.Fish Fry")
-# dishes.JuiceList("1.Apple Juice","2.Oreo","3.Pine apple","4.Badam Gir","5.Lemon Juice")
+def authentication(regno, password):
+    if (regno == 5005 and password == 2122):
+        home()
+    else:
+        print("please enter correct credentials")
+
+
+def home():
+    print("\n Timings Schedule \n 1. 8.00 AM to 11.00 AM  \n 2. 11.30 PM to 3.00 PM  \n 3. 3.30 PM to 5.30 PM \n 4. 6.00 PM to 9.00 PM ")
+    timings = int(input("\n Select your timings:"))
+    if(timings == 1):
+        Breakfast()
+    elif(timings == 2):
+        Lunch()
+    elif(timings == 3):
+        JuiceSnacks()
+    elif(timings == 4):
+        Dinner()
+    else:
+        print("Please select proper time...")
+
+
+
+
+def Lunch():
+    print(" Please choose the categories:")
+    print("\n Categories \n 1.Veg  \n 2.Non Veg \n 3.Fresh Juice")
+    category = str(input("\nSelect your category(s):\n"))
+    if(category == "1" or category == "Veg"):
+        Veg()
+    elif(category == "2" or category == "Non Veg"):
+        NonVeg()
+    elif(category == "3" or category == "Fresh Juice and Snacks"):
+        JuiceSnacks()
+    else:
+        print("Please give a valid category in the list...")
+
+
+
+
+
+def Veg():
+    print("You have selected Veg Category")
+    print("Items... \n 1.Sambar Rice => 1 plate $30  \n 2.Veg Rice => 1 plate $40 \n 3.Lemon Rice => 1 plate $50 \n 4.Curd Rice => 1 plate 30Rs")
+    VegItem = input("Enter your Choice:")
+    if(VegItem == "1" or VegItem == "Sambar Rice"):
+        price = 30
+        bill = QuantityCalc("Sambar Rice", price)
+        print("Your Total Bill Amount:", bill)
+    elif(VegItem == "2" or VegItem == "Veg Rice"):
+        bill = QuantityCalc("Veg Rice", 40)
+        print("Your Total Bill Amount:", bill)
+    elif(VegItem == "3" or VegItem == "Lemon Rice"):
+        bill = QuantityCalc("Lemon Rice", 50)
+        print("Your Total Bill Amount:", bill)
+    elif(VegItem == "4" or VegItem == "Curd Rice"):
+        bill = QuantityCalc("Curd Rice", 30)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
+
+
+def NonVeg():
+    print("You have selected Non Veg Category")
+    print("Items... \n 1.Chicken Rice => 1 plate $70  \n 2.Egg Rice => 1 plate $40 \n 3.Chicken Biryani => 1 plate $90 \n 4.Chicken Noodles => 1 plate $70")
+    NonVegItem = input("Enter your Choice:")
+    if(NonVegItem == "1" or NonVegItem == "Chicken Rice"):
+        bill = QuantityCalc("Chicken Rice", 70)
+        print("Your Total Bill Amount:", bill)
+    elif(NonVegItem == "2" or NonVegItem == "Egg Rice"):
+        bill = QuantityCalc("Egg Rice", 40)
+        print("Your Total Bill Amount:", bill)
+    elif(NonVegItem == "3" or NonVegItem == "Chicken Biryani"):
+        bill = QuantityCalc("Chicken Biryani", 50)
+        print("Your Total Bill Amount:", bill)
+    elif(NonVegItem == "4" or NonVegItem == "Chicken Noodles"):
+        bill = QuantityCalc("Chicken Noodles", 30)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
+
+
+def JuiceSnacks():
+    print("You have selected Fresh Juice and Snacks Category")
+    print("Items... \n 1.Lemon Juice => 1 glass 50ml $25  \n 2.Oreo Juice=> 1 glass 50ml $50 \n 3.Chicken Puffs => 1 glass 50g $20 \n 4. Chicken Roll => 1 glass 25g $10")
+    juicesnacksChoice = input("Enter your Choice:")
+    if(juicesnacksChoice == "1" or juicesnacksChoice == "Lemon Juice"):
+        bill = QuantityCalc("Lemon Juice", 25)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "2" or juicesnacksChoice == "Oreo Juice"):
+        bill = QuantityCalc("Oreo Juice", 50)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "3" or juicesnacksChoice == "Chicken Puffs"):
+        bill = QuantityCalc("Chicken Puffs", 20)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "4" or juicesnacksChoice == "Chicken Roll"):
+        bill = QuantityCalc("Chicken Noodles", 10)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
+
+
+def Dinner():
+    print("You have selected Fresh Juice and Snacks Category")
+    print("Items... \n 1.Veg Pulav => 1 plate 50g $25  \n 2.Idly=> 1 pice $5 \n 3.Plain Dosa => 1 pice $20 \n 4. Parotta => 1 pice $10")
+    DinnerChoice = input("Enter your Choice:")
+    if(DinnerChoice == "1" or DinnerChoice == "Veg Pulav"):
+        bill = QuantityCalc("Veg Pulav", 25)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "2" or DinnerChoice == "Idly"):
+        bill = QuantityCalc("Idly", 5)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "3" or DinnerChoice == "Plain Dosa"):
+        bill = QuantityCalc("Plain Dosa", 20)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "4" or DinnerChoice == "Parotta"):
+        bill = QuantityCalc("Parotta", 10)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
+
+def QuantityCalc(item, peramt):
+    qty = int(input("Enter the quantity you want:"))
+    billamt = qty*peramt
+    print("Item Name:", item)
+    print("You entered quantity:", qty)
+    return billamt
