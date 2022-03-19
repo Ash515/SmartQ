@@ -26,17 +26,34 @@ def home():
     print("\n Timings Schedule \n 1. 8.00 AM to 11.00 AM  \n 2. 11.30 PM to 3.00 PM  \n 3. 3.30 PM to 5.30 PM \n 4. 6.00 PM to 9.00 PM ")
     timings = int(input("\n Select your timings:"))
     if(timings == 1):
-        Breakfast()
+        Tiffen()
     elif(timings == 2):
         Lunch()
     elif(timings == 3):
         JuiceSnacks()
     elif(timings == 4):
-        Dinner()
+        Tiffen()
     else:
         print("Please select proper time...")
 
-
+def Tiffen():
+    print("You have selected Fresh Juice and Snacks Category")
+    print("Items... \n 1.Veg Pulav => 1 plate 50g $25  \n 2.Idly=> 1 pice $5 \n 3.Plain Dosa => 1 pice $20 \n 4. Parotta => 1 pice $10")
+    DinnerChoice = input("Enter your Choice:")
+    if(DinnerChoice == "1" or DinnerChoice == "Veg Pulav"):
+        bill = QuantityCalc("Veg Pulav", 25)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "2" or DinnerChoice == "Idly"):
+        bill = QuantityCalc("Idly", 5)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "3" or DinnerChoice == "Plain Dosa"):
+        bill = QuantityCalc("Plain Dosa", 20)
+        print("Your Total Bill Amount:", bill)
+    elif(DinnerChoice == "4" or DinnerChoice == "Parotta"):
+        bill = QuantityCalc("Parotta", 10)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
 
 
 def Lunch():
@@ -52,8 +69,24 @@ def Lunch():
     else:
         print("Please give a valid category in the list...")
 
-
-
+def JuiceSnacks():
+    print("You have selected Fresh Juice and Snacks Category")
+    print("Items... \n 1.Lemon Juice => 1 glass 50ml $25  \n 2.Oreo Juice=> 1 glass 50ml $50 \n 3.Chicken Puffs => 1 glass 50g $20 \n 4. Chicken Roll => 1 glass 25g $10")
+    juicesnacksChoice = input("Enter your Choice:")
+    if(juicesnacksChoice == "1" or juicesnacksChoice == "Lemon Juice"):
+        bill = QuantityCalc("Lemon Juice", 25)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "2" or juicesnacksChoice == "Oreo Juice"):
+        bill = QuantityCalc("Oreo Juice", 50)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "3" or juicesnacksChoice == "Chicken Puffs"):
+        bill = QuantityCalc("Chicken Puffs", 20)
+        print("Your Total Bill Amount:", bill)
+    elif(juicesnacksChoice == "4" or juicesnacksChoice == "Chicken Roll"):
+        bill = QuantityCalc("Chicken Noodles", 10)
+        print("Your Total Bill Amount:", bill)
+    else:
+        print("Please choose a displayed foods")
 
 
 def Veg():
@@ -96,49 +129,12 @@ def NonVeg():
     else:
         print("Please choose a displayed foods")
 
-
-def JuiceSnacks():
-    print("You have selected Fresh Juice and Snacks Category")
-    print("Items... \n 1.Lemon Juice => 1 glass 50ml $25  \n 2.Oreo Juice=> 1 glass 50ml $50 \n 3.Chicken Puffs => 1 glass 50g $20 \n 4. Chicken Roll => 1 glass 25g $10")
-    juicesnacksChoice = input("Enter your Choice:")
-    if(juicesnacksChoice == "1" or juicesnacksChoice == "Lemon Juice"):
-        bill = QuantityCalc("Lemon Juice", 25)
-        print("Your Total Bill Amount:", bill)
-    elif(juicesnacksChoice == "2" or juicesnacksChoice == "Oreo Juice"):
-        bill = QuantityCalc("Oreo Juice", 50)
-        print("Your Total Bill Amount:", bill)
-    elif(juicesnacksChoice == "3" or juicesnacksChoice == "Chicken Puffs"):
-        bill = QuantityCalc("Chicken Puffs", 20)
-        print("Your Total Bill Amount:", bill)
-    elif(juicesnacksChoice == "4" or juicesnacksChoice == "Chicken Roll"):
-        bill = QuantityCalc("Chicken Noodles", 10)
-        print("Your Total Bill Amount:", bill)
-    else:
-        print("Please choose a displayed foods")
-
-
-def Dinner():
-    print("You have selected Fresh Juice and Snacks Category")
-    print("Items... \n 1.Veg Pulav => 1 plate 50g $25  \n 2.Idly=> 1 pice $5 \n 3.Plain Dosa => 1 pice $20 \n 4. Parotta => 1 pice $10")
-    DinnerChoice = input("Enter your Choice:")
-    if(DinnerChoice == "1" or DinnerChoice == "Veg Pulav"):
-        bill = QuantityCalc("Veg Pulav", 25)
-        print("Your Total Bill Amount:", bill)
-    elif(DinnerChoice == "2" or DinnerChoice == "Idly"):
-        bill = QuantityCalc("Idly", 5)
-        print("Your Total Bill Amount:", bill)
-    elif(DinnerChoice == "3" or DinnerChoice == "Plain Dosa"):
-        bill = QuantityCalc("Plain Dosa", 20)
-        print("Your Total Bill Amount:", bill)
-    elif(DinnerChoice == "4" or DinnerChoice == "Parotta"):
-        bill = QuantityCalc("Parotta", 10)
-        print("Your Total Bill Amount:", bill)
-    else:
-        print("Please choose a displayed foods")
-
 def QuantityCalc(item, peramt):
     qty = int(input("Enter the quantity you want:"))
     billamt = qty*peramt
+    print("********************Bill Details********************")
     print("Item Name:", item)
     print("You entered quantity:", qty)
     return billamt
+
+index()
