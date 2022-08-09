@@ -2,4 +2,4 @@
 ## Smart Canteen System to make crowd free environment to students and canteen managers
 
 By
-Ashwin  
+Ashwin Kumar R 
